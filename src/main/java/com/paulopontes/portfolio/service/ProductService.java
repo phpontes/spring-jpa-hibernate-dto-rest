@@ -21,6 +21,11 @@ public class ProductService {
 		return products.stream().map(this::toDTO).collect(Collectors.toList());
 	}
 	
+	public List<ProductDTO> getProductsByPrice(Double price) {
+		List<Product> products = productRepository.findAllByPriceLessThan(price);
+		return products.stream().map(this::toDTO).collect(Collectors.toList());
+	}
+	
 	public ProductDTO getProductById(Long id) {
 		return productRepository.findById(id).map(this::toDTO).orElse(null);
 	}

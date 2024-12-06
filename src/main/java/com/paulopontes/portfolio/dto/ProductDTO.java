@@ -2,10 +2,17 @@ package com.paulopontes.portfolio.dto;
 
 import com.paulopontes.portfolio.model.Product;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 public class ProductDTO {
 
 	private Long id;
+	
+	@NotBlank(message = "oi m8, the name cannot be blank")
 	private String name;
+	
+	@Min(value = 0, message = "Sire, the price must be positive. You're not buying debts, are you?")
 	private Double price;
 	
 	public ProductDTO() {

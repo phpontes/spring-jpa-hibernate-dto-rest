@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.paulopontes.portfolio.dto.ProductDTO;
 import com.paulopontes.portfolio.service.ProductService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -32,13 +34,18 @@ public class ProductController {
 		return productService.getProductById(id);
 	}
 	
+	@GetMapping("/price/{price}")
+	public List<ProductDTO> getProductsByPrice(@PathVariable Double price) {
+		return productService.getProductsByPrice(price);
+	}
+	
 	@PostMapping
-	public ProductDTO createProduct(@RequestBody ProductDTO productDTO) {
+	public ProductDTO createProduct(@Valid @RequestBody ProductDTO productDTO) {
 		return productService.createProduct(productDTO);
 	}
 	
 	@PutMapping("/{id}")
-	public ProductDTO updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+	public ProductDTO updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDTO productDTO) {
 		return productService.updateProduct(id, productDTO);
 	}
 	
